@@ -5,7 +5,7 @@ from app.types.api_exmo_responses import CandlesHistory
 from app.lib.api_exmo_client import ApiExmoClient
 
 class TestApiExmoClient(unittest.TestCase):
-  ''' This class run all tests for ApiExmoClient class '''
+  ''' This class contains tests for ApiExmoClient class '''
   def test_candles_history_request_with_valid_params(self):
     ''' This case checks the situation when a regular response comes from api
         with correct request parameters '''

@@ -5,6 +5,11 @@ This application implements the simplest pipeline, including:
   - CD - continious deployment;
   - CT - continious training;
 
+## Application settings
+The application has several environments. For development, this environment is called development. For testing - test. For a working server, this environment is called production.
+All development environment settings are described in the ./.env file.
+You would to copy file ./.env.example to ./.env for first time in your local development environment and customize settings.
+
 ## Continious Integration
 
 There are several types of checks that should be run before submitting code to make sure everything is fine.
@@ -24,3 +29,4 @@ To run unit tests:
 ```bash
 ./scripts/run_pytest
 ```
+
