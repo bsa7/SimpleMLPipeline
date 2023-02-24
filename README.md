@@ -1,5 +1,9 @@
 # Simple Machine Learning Pipeline
 
+## Code quality
+![Pylint](https://github.com/bsa7/SimpleMLPipeline/actions/workflows/pylint.yml/badge.svg?branch=develop)&nbsp;
+![Pytest](https://github.com/bsa7/SimpleMLPipeline/actions/workflows/pytest.yml/badge.svg?branch=develop)&nbsp;
+
 This application implements the simplest pipeline, including:
   - CI - continious integration;
   - CD - continious deployment;
