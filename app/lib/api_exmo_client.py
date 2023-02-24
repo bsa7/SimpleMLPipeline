@@ -1,5 +1,6 @@
 ''' This file contains class for fetch data from exmo API '''
 from app.lib.api_client import ApiClient
+from app.lib.env import Env
 from app.types.api_exmo_responses import CandlesHistory
 
 class ApiExmoClient:
@@ -21,11 +22,9 @@ class ApiExmoClient:
   @property
   def __candles_history_path(self) -> str:
     ''' Returns candles history API path '''
-    # that value could be imported from env vars
     return '/candles_history'
 
   @property
   def __api_url(self) -> str:
     ''' Returns exmo API url '''
-    # that value could be imported from env vars
-    return 'https://api.exmo.com/v1.1'
+    return Env().get('API_EXMO_HOST')
