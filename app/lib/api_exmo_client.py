@@ -1,0 +1,31 @@
+''' This file contains class for fetch data from exmo API '''
+from app.lib.api_client import ApiClient
+from app.types.api_exmo_responses import CandlesHistory
+
+class ApiExmoClient:
+  ''' This class contains methods for fetching data from API '''
+  def __init__(self):
+    self.__api_client = ApiClient(self.__api_url)
+
+  def candles_history(self, symbol: str, from_timestamp: int, to_timestamp: int) -> CandlesHistory:
+    ''' This method get candles of symbol from API for exact period '''
+    request_attributes: dict = {
+      'symbol': symbol,
+      'from': from_timestamp,
+      'to': to_timestamp,
+      'resolution': 1 }
+
+    result = self.__api_client.get(self.__candles_history_path, request_attributes)
+    return result['candles']
+
+  @property
+  def __candles_history_path(self) -> str:
+    ''' Returns candles history API path '''
+    # that value could be imported from env vars
+    return '/candles_history'
+
+  @property
+  def __api_url(self) -> str:
+    ''' Returns exmo API url '''
+    # that value could be imported from env vars
+    return 'https://api.exmo.com/v1.1'
