@@ -1,3 +1,6 @@
+![Pylint](https://github.com/bsa7/SimpleMLPipeline/actions/workflows/pylint.yml/badge.svg)&nbsp;
+![Pytest](https://github.com/bsa7/SimpleMLPipeline/actions/workflows/pytest.yml/badge.svg)&nbsp;
+
 # Simple Machine Learning Pipeline
 
 This application implements the simplest pipeline, including:
