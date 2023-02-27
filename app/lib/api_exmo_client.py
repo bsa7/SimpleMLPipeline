@@ -3,12 +3,10 @@ from app.lib.api_client import ApiClient
 from app.lib.env import Env
 from app.types.api_exmo_responses import CandlesHistory
 
-class ApiExmoClient:
+class ApiExmoClient(ApiClient):
   ''' This class contains methods for fetching data from API '''
-  def __init__(self):
-    self.__api_client = ApiClient(self.__api_url)
 
-  def candles_history(self, symbol: str, from_timestamp: int, to_timestamp: int) -> CandlesHistory:
+  def fetch_data(self, symbol: str, from_timestamp: int, to_timestamp: int) -> CandlesHistory:
     ''' This method get candles of symbol from API for exact period '''
     request_attributes: dict = {
       'symbol': symbol,
@@ -16,15 +14,15 @@ class ApiExmoClient:
       'to': to_timestamp,
       'resolution': 1 }
 
-    result = self.__api_client.get(self.__candles_history_path, request_attributes)
+    result = self._get(self.__candles_history_path, request_attributes)
     return result['candles']
+
+  @property
+  def _api_url(self) -> str:
+    ''' Returns exmo API url '''
+    return Env().get('API_EXMO_HOST')
 
   @property
   def __candles_history_path(self) -> str:
     ''' Returns candles history API path '''
     return '/candles_history'
-
-  @property
-  def __api_url(self) -> str:
-    ''' Returns exmo API url '''
-    return Env().get('API_EXMO_HOST')
