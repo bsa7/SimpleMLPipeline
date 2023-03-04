@@ -12,7 +12,10 @@ class TestApiExmoClient(unittest.TestCase):
         with correct request parameters '''
     uri = 'https://api.exmo.com/v1.1/candles_history?from=1585551900&resolution=1&symbol=BTC_USDT&to=1585552000'
     expected_response: CandlesHistory = { 'candles': [{ 't': 1 }] }
+    api_exmo_client = ApiExmoClient(resolution = 1)
     with responses.RequestsMock() as rsps:
       stub_get_request(rsps, uri, expected_response)
-      response = ApiExmoClient().fetch_data('BTC_USDT', 1585551900, 1585552000)
+      response = api_exmo_client.fetch_data(symbol = 'BTC_USDT',
+                                            from_timestamp = 1585551900000,
+                                            to_timestamp = 1585552000000)
       self.assertEqual(response, expected_response['candles'])

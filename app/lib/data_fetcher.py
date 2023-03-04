@@ -1,20 +1,19 @@
 ''' This file contains a DataFetcher class - this class working with data: load data, store data '''
-from datetime import datetime
-# from app.lib.env import Env
+from app.lib.utils import current_timestamp, minutes
 
 class DataFetcher():
   ''' This class fetches new portion of data from desired source. '''
-  DEFAULT_FETCH_INTERVAL = 1 * 60000 # 1.minute
+  DEFAULT_FETCH_INTERVAL = minutes(1)
 
   def __init__(self,
                api_client,
                from_timestamp = None,
                to_timestamp = None,
-               fetch_interval_size = DEFAULT_FETCH_INTERVAL):
+               batch_size_in_milliseconds = DEFAULT_FETCH_INTERVAL):
     self.__from_timestamp = from_timestamp
     self.__to_timestamp = to_timestamp
     self.__api_client = api_client
-    self.__fetch_interval_size = fetch_interval_size
+    self.__batch_size_in_milliseconds = batch_size_in_milliseconds
 
   def update(self, symbol: str):
     ''' This method look over previous stored data and fetch new data '''
@@ -22,7 +21,7 @@ class DataFetcher():
     return self.__api_client.fetch_data_in_batches(symbol = symbol,
                                                    from_timestamp = start_timestamp,
                                                    to_timestamp = self.__finish_timestamp,
-                                                   batch_size_in_milliseconds = self.__fetch_interval_size)
+                                                   batch_size_in_milliseconds = self.__batch_size_in_milliseconds)
 
   def __start_timestamp(self, symbol: str) -> int:
     ''' This method determines the last point in time beyond which the required
@@ -33,7 +32,7 @@ class DataFetcher():
     if self.__from_timestamp is not None:
       return self.__from_timestamp
 
-    return self.__finish_timestamp - self.__fetch_interval_size
+    return self.__finish_timestamp - self.__batch_size_in_milliseconds
 
   @property
   def __finish_timestamp(self) -> int:
@@ -41,4 +40,4 @@ class DataFetcher():
     if self.__to_timestamp is not None:
       return self.__to_timestamp
 
-    return int(datetime.now().timestamp())
+    return current_timestamp()
