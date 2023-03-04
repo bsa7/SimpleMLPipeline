@@ -10,9 +10,9 @@ class ApiExmoClient(ApiClient):
     ''' This method get candles of symbol from API for exact period '''
     request_attributes: dict = {
       'symbol': symbol,
-      'from': from_timestamp,
-      'to': to_timestamp,
-      'resolution': 1 }
+      'from': int(from_timestamp / 1000),
+      'to': int(to_timestamp / 1000),
+      'resolution': self._resolution }
 
     result = self._get(self.__candles_history_path, request_attributes)
     return result['candles']
