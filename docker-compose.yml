@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  mongo:
+    build:
+      context: .
+      dockerfile: stages/development/Dockerfile.mongo
+    container_name: app_mongo
+    environment:
+      MONGO_INITDB_DATABASE: "smlp_development"
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/app_mongo_root_password
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_PASSWORD_FILE: /run/secrets/app_mongo_password
+      MONGO_USER: "admin"
+    secrets:
+      - app_mongo_password
+      - app_mongo_root_password
+    volumes:
+      - mongo:/data/db
+    network_mode: host
+
+secrets:
+  app_mongo_password:
+    file: ./stages/development/mongo/password
+  app_mongo_root_password:
+    file: ./stages/development/mongo/root_password
+
+volumes:
+  mongo:
