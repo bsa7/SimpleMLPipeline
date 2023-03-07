@@ -35,6 +35,24 @@ The application has several environments. For development, this environment is c
 All development environment settings are described in the ./.env file.
 You would to copy file ./.env.example to ./.env for first time in your local development environment and customize settings.
 
+## Run application
+
+### In development mode
+In development mode you would to use dockerized services. To run all of them use:
+```bash
+docker-compose up
+```
+
+or, if you want to daemonize it:
+```bash
+docker-compose up -d
+```
+
+Also, you can stop all services:
+```bash
+docker-compose stop
+```
+
 ## Continious Integration
 
 There are several types of checks that should be run before submitting code to make sure everything is fine.
