@@ -30,10 +30,14 @@ class ApplicationRecord():
     if existed_item is None:
       return cls.insert_one(**find_by, **data)
 
-    print(f'{find_by=}, {data=}')
     return cls.collection.update_one({ 'model': cls.__name__, **find_by }, { '$set': data })
 
   @classmethod
   def where(cls, **filter_attributes):
     ''' Returns records by filter_attributes '''
     return cls.collection.find({ 'model': cls.__name__, **filter_attributes })
+
+  @classmethod
+  def unset_many(cls, filter_attributes, unset_attributes):
+    ''' Unset multiple keys in filtered records '''
+    return cls.collection.update_many(filter_attributes, { '$unset': unset_attributes })

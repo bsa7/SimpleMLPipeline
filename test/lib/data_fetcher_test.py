@@ -60,7 +60,7 @@ class TestDataFetcher(unittest.TestCase):
     instrument = 'BTC_USDT'
     Candle.insert_one(instrument = instrument, ds = 1585551800000, t = 3)
     data_fetcher = DataFetcher(api_client = ApiExmoClient(resolution = 'D'),
-                               from_timestamp = 1583219100000,
+                               from_timestamp = 1585551801000,
                                to_timestamp = 1585551900000,
                                batch_size_in_milliseconds = days(25))
 
@@ -69,10 +69,9 @@ class TestDataFetcher(unittest.TestCase):
       result = data_fetcher.update(symbol = instrument)
       self.assertEqual(result, expected_response2['candles'])
 
-  def test_update_when_no_latest_timestamp_is_present(self):
+  def test_update_within_to_timestamp_parameter(self):
     ''' This case checks the update method query data till current time '''
     current_time = current_timestamp()
-    earlier_time = current_time - days(2)
     nearest_time = current_time - hours(2)
 
     time_from = int(nearest_time / 1000 + 1)
@@ -80,9 +79,8 @@ class TestDataFetcher(unittest.TestCase):
     uri2 = f'https://api.exmo.com/v1.1/candles_history?from={time_from}&resolution=D&symbol=BTC_USDT&to={time_to}'
     expected_response2: CandlesHistory = { 'candles': [{ 't': 2 }] }
     instrument = 'BTC_USDT'
-    Candle.insert_one(instrument = instrument, ds = nearest_time, t = 3)
     data_fetcher = DataFetcher(api_client = ApiExmoClient(resolution = 'D'),
-                               from_timestamp = earlier_time,
+                               from_timestamp = nearest_time,
                                batch_size_in_milliseconds = days(25))
 
     with responses.RequestsMock() as rsps:
