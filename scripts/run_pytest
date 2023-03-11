@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-PYTHON_ENV=test python -m pytest --capture=sys --envfile=.test.env
+PYTHON_ENV=test python -m pytest --cov=app --cov-report=xml:coverage/report.xml --cov-report=html:coverage/report --capture=sys --envfile=.test.env

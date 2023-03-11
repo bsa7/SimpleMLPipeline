@@ -28,3 +28,17 @@ jobs:
     - name: Testing the code with Pytest
       run: |
         ./scripts/run_pytest
+    - name: Get Cover
+      uses: orgoro/coverage@v3
+      with:
+        coverageFile: coverage/report.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Coverage Badge
+      uses: tj-actions/coverage-badge-py@v2
+    - name: Deploy Coverage Badge to gist
+      uses: exuanbo/actions-deploy-gist@v1
+      with:
+        token: ${{ secrets.TOKEN }}
+        gist_id: 484e36769fa2cd1637e7aed39aedc5a4
+        file_path: coverage.svg
+        file_type: binary
