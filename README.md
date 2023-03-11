@@ -1,6 +1,6 @@
 ![Pylint](https://github.com/bsa7/SimpleMLPipeline/actions/workflows/pylint.yml/badge.svg)&nbsp;
 ![Pytest](https://github.com/bsa7/SimpleMLPipeline/actions/workflows/pytest.yml/badge.svg)&nbsp;
-
+![Coverage](https://gist.github.com/bsa7/484e36769fa2cd1637e7aed39aedc5a4/raw/coverage.svg)&nbsp;
 # Simple Machine Learning Pipeline
 
 This application implements the simplest pipeline, including:
@@ -73,3 +73,7 @@ To run unit tests:
 ./scripts/run_pytest
 ```
 
+### Code coverage
+
+In development environment you can check an [html coverage report](./coverage/report/index.html)
+In github
