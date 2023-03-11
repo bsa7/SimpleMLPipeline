@@ -3,7 +3,7 @@ import unittest
 import responses
 from app.types.api_exmo_responses import CandlesHistory
 from app.lib.api_exmo_client import ApiExmoClient
-from test.support.mock_helper import stub_get_request
+from test.support.stub_helper import stub_get_request
 
 class TestApiExmoClient(unittest.TestCase):
   ''' This class contains tests for ApiExmoClient class '''

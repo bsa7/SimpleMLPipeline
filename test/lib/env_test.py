@@ -18,3 +18,8 @@ class TestEnv(unittest.TestCase):
     expected_value = None
     var_name = 'TEST_VARIABLE'
     self.assertEqual(Env().get(var_name), expected_value)
+
+  def test_get_env_name(self):
+    ''' This case checks if Env.name returns right test environment name '''
+    expected_env_name = 'test'
+    self.assertEqual(Env().name, expected_env_name)

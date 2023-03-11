@@ -152,6 +152,7 @@ disable=bad-inline-option,
         no-name-in-module,
         raw-checker-failed,
         suppressed-message,
+        too-few-public-methods,
         use-symbolic-message-instead,
         useless-suppression,
         wrong-import-order

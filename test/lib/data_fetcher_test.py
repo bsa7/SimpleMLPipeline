@@ -5,7 +5,7 @@ from app.lib.data_fetcher import DataFetcher
 from app.lib.api_exmo_client import ApiExmoClient
 from app.lib.utils import days, seconds
 from app.types.api_exmo_responses import CandlesHistory
-from test.support.mock_helper import stub_get_request
+from test.support.stub_helper import stub_get_request
 
 class TestDataFetcher(unittest.TestCase):
   ''' This class contains tests for DataFetcher class '''
