@@ -18,7 +18,7 @@ class ServiceFactory(metaclass = Singleton):
     if env_name == 'test':
       return test or development or production
 
-    if env_name == 'development':
+    if env_name == 'development': # pragma: no cover
       return development or production
 
-    return production or development
+    return production or development # pragma: no cover

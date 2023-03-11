@@ -19,3 +19,15 @@ class TestApiExmoClient(unittest.TestCase):
                                             from_timestamp = 1585551900000,
                                             to_timestamp = 1585552000000)
       self.assertEqual(response, expected_response['candles'])
+
+  def test_candles_history_when_no_data(self):
+    ''' This case checks situation if no data present in API '''
+    uri = 'https://api.exmo.com/v1.1/candles_history?from=1585551900&resolution=1&symbol=BTC_USDT&to=1585552000'
+    expected_response = { 's': 'no data' }
+    api_exmo_client = ApiExmoClient(resolution = 1)
+    with responses.RequestsMock() as rsps:
+      stub_get_request(rsps, uri, expected_response)
+      response = api_exmo_client.fetch_data(symbol = 'BTC_USDT',
+                                            from_timestamp = 1585551900000,
+                                            to_timestamp = 1585552000000)
+      self.assertEqual(response, [])

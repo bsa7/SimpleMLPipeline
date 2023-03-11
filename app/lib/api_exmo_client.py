@@ -15,6 +15,10 @@ class ApiExmoClient(ApiClient):
       'resolution': self._resolution }
 
     result = self._get(self.__candles_history_path, request_attributes)
+
+    if result.get('candles') is None:
+      return []
+
     return result['candles']
 
   @property

@@ -1,4 +1,5 @@
 ''' This file contains a DataFetcher class - this class working with data: load data, store data '''
+from app.models.candle import Candle
 from app.lib.utils import current_timestamp, minutes
 
 class DataFetcher():
@@ -28,11 +29,13 @@ class DataFetcher():
         data is stored in the system. In fact, this moment plus one millisecond
         is the start for the time interval for which the data will be received. '''
     # In this point we would to find last data of time series in our db
-    print(f'{symbol=}')
-    if self.__from_timestamp is not None:
+    if Candle.count(instrument = symbol) == 0:
       return self.__from_timestamp
 
-    return self.__finish_timestamp - self.__batch_size_in_milliseconds
+    latest_existing_record = Candle.get_latest(instrument = symbol).limit(1).next()
+    latest_timestamp = latest_existing_record['ds']
+
+    return latest_timestamp + 1
 
   @property
   def __finish_timestamp(self) -> int:
