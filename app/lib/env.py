@@ -11,3 +11,8 @@ class Env(metaclass = Singleton):
   def get(self, variable_name: str):
     ''' This metod reads environment variable value '''
     return os.getenv(variable_name)
+
+  @property
+  def name(self) -> str:
+    ''' Returns environment name (test | development | production) '''
+    return os.getenv('PYTHON_ENV')
