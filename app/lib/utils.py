@@ -25,3 +25,11 @@ def hours(value: float) -> int:
 def days(value: float) -> int:
   ''' This method returns milliseconds for value of days '''
   return hours(value * 24)
+
+def filter_list(filter_attributes):
+  ''' Creates a lambda for list filtering '''
+  def filter_lambda(item):
+    ''' Filters list of dicts by attributes '''
+    return item.items() | filter_attributes.items() == item.items()
+
+  return filter_lambda

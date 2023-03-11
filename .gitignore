@@ -3,4 +3,5 @@ __pycache__
 .vscode
 .env
 .coverage
+coverage/report.xml
 tmp

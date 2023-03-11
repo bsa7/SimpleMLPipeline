@@ -3,7 +3,7 @@ import pymongo
 from app.lib.singleton import Singleton
 from app.lib.env import Env
 
-class MongoClient(metaclass = Singleton):
+class MongoClient(metaclass = Singleton): # pragma: no cover
   ''' This class implements mongo db client '''
   def __init__(self):
     print(f'{self.__connection_string=}')
@@ -23,9 +23,6 @@ class MongoClient(metaclass = Singleton):
   @property
   def __auth_string(self) -> str:
     ''' Returns authentication string '''
-    if self.__mongo_user_name is None or self.__mongo_user_name == '':
-      return ''
-
     return f"{self.__mongo_user_name}:{self.__mongo_password}@"
 
   @property

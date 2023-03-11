@@ -13,12 +13,12 @@ class ApiClient(ABC):
   @abstractmethod
   def _api_url(self) -> str:
     ''' Returns API url '''
-    return ''
+    raise NotImplementedError # pragma: no cover
 
   @abstractmethod
   def fetch_data(self, symbol: str, from_timestamp: int, to_timestamp: int) -> CandlesHistory:
     ''' This common method name for api_client implementation. It load data portion from API '''
-    return
+    raise NotImplementedError # pragma: no cover
 
   def fetch_data_in_batches(self,
                             symbol: str,

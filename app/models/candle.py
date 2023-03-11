@@ -3,3 +3,7 @@ from app.models.application_record import ApplicationRecord
 
 class Candle(ApplicationRecord):
   '''This class contains Candle class definition'''
+  @classmethod
+  def get_latest(cls, instrument: str) -> dict:
+    ''' Returns latest record for desired instrument or None if no records found '''
+    return cls.where(instrument = instrument).sort([('ds', -1)]).limit(1)

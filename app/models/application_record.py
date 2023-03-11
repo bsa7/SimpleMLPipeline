@@ -32,3 +32,8 @@ class ApplicationRecord():
 
     print(f'{find_by=}, {data=}')
     return cls.collection.update_one({ 'model': cls.__name__, **find_by }, { '$set': data })
+
+  @classmethod
+  def where(cls, **filter_attributes):
+    ''' Returns records by filter_attributes '''
+    return cls.collection.find({ 'model': cls.__name__, **filter_attributes })
