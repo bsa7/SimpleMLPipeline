@@ -1,15 +1,15 @@
 ''' This file contains unsorted methods '''
 from datetime import datetime
 
-def timestamp_to_formatted_datetime(timestamp: int) -> str:
+def timestamp_to_formatted_datetime(timestamp: int, datetime_format = '%Y-%m-%d %H:%M:%S.%f') -> str:
   ''' Converts a unix timestamp with milliseconds (1585557000000) to formatted datetime like:
       2020-03-30 08:30:00.231000 '''
-  return datetime.utcfromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d %H:%M:%S.%f')
+  return datetime.utcfromtimestamp(timestamp / 1000.0).strftime(datetime_format)
 
-def timestamp_to_formatted_date(timestamp: int) -> str:
+def timestamp_to_formatted_date(timestamp: int, date_format = '%Y-%m-%d') -> str:
   ''' Converts a unix timestamp with milliseconds (1585557000000) to formatted date like:
       2020-03-30 '''
-  return datetime.utcfromtimestamp(timestamp / 1000.0).strftime('%Y-%m-%d')
+  return datetime.utcfromtimestamp(timestamp / 1000.0).strftime(date_format)
 
 def current_timestamp() -> int:
   ''' This method returns the current time in unix timestamp (in milliseconds) '''

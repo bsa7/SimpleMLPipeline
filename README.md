@@ -38,7 +38,7 @@ You would to copy file ./.env.example to ./.env for first time in your local dev
 ## Run application
 
 ### In development mode
-In development mode you would to use dockerized services. To run all of them use:
+1. In development mode you would to use dockerized services. To run all of them use:
 ```bash
 docker-compose up
 ```
@@ -52,6 +52,24 @@ Also, you can stop all services:
 ```bash
 docker-compose stop
 ```
+
+2. When dockerized storage is running, collect data for time series:
+```bash
+python data_creation.py
+```
+
+3. After data collected, prepare `y` values:
+```bash
+python model_preprocessing.py
+```
+
+4. After `y` value ready, prepare model:
+```bash
+python model_preparation.py
+```
+At the end of this step you can see the chart, like this:
+![chart wit predictions](./docs/assets/forecasting_results.png)
+
 
 ## Continious Integration
 
