@@ -32,6 +32,22 @@ class Collection:
     cls.__storage[record_index] = { **cls.__storage[record_index], **data }
 
   @classmethod
+  def update_many(cls, filter_attributes, data_attributes):
+    ''' Update multiple records in storage '''
+    filter_lambda = filter_list(filter_attributes)
+    set_data = data_attributes.get('$set') or {}
+    unset_data = data_attributes.get('$unset') or {}
+    for index, item in enumerate(cls.__storage):
+      if not filter_lambda(item):
+        continue
+
+      item = { **item, **set_data }
+      for key in unset_data.keys():
+        del item[key]
+      cls.__storage[index] = item
+
+
+  @classmethod
   def find_one(cls, filter_attributes):
     ''' Find first record with exact attributes '''
     result = cls.find_many(filter_attributes)

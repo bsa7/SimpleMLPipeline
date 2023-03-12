@@ -32,6 +32,11 @@ class DataFetcher():
     if Candle.count(instrument = symbol) == 0:
       return self.__from_timestamp
 
+    oldest_existing_record = Candle.get_oldest(instrument = symbol).limit(1).next()
+    oldest_timestamp = oldest_existing_record['ds']
+    if oldest_timestamp > self.__from_timestamp:
+      return self.__from_timestamp
+
     latest_existing_record = Candle.get_latest(instrument = symbol).limit(1).next()
     latest_timestamp = latest_existing_record['ds']
 

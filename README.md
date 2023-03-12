@@ -76,4 +76,6 @@ To run unit tests:
 ### Code coverage
 
 In development environment you can check an [html coverage report](./coverage/report/index.html)
-In github
+Its look like this: ![coverage_html_report](./docs/assets/coverage_html_report.png)
+
+In github - see the latest action, for example [this](https://github.com/bsa7/SimpleMLPipeline/actions/runs/4392188767)

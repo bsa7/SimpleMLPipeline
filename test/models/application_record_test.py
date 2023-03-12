@@ -54,3 +54,14 @@ class TestApplicationRecord(unittest.TestCase):
     Candle.upsert_one(find_by = record_search_attributes, data = new_record_attributes)
     created_record = Candle.find_one(**record_search_attributes)
     self.assertEqual(created_record, expected_updated_record_attributes)
+
+  def test_unset_many(self):
+    ''' This case checks correctly unset keys in existed documents '''
+    record_search_attributes = { 'ds': 12345 }
+    Candle.insert_one(**record_search_attributes, key1 = 1, key2 = 2)
+    Candle.insert_one(ds = 12346, key1 = 1, key2 = 2)
+    existed_record = Candle.find_one(**record_search_attributes)
+    self.assertEqual(existed_record.get('key2'), 2)
+    Candle.unset_many(filter_attributes = record_search_attributes, unset_attributes = { 'key2': 1 })
+    existed_record = Candle.find_one(**record_search_attributes)
+    self.assertEqual(existed_record.get('key2'), None)

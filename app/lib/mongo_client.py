@@ -6,7 +6,6 @@ from app.lib.env import Env
 class MongoClient(metaclass = Singleton): # pragma: no cover
   ''' This class implements mongo db client '''
   def __init__(self):
-    print(f'{self.__connection_string=}')
     self.client = pymongo.MongoClient(self.__connection_string)
     self.database = self.client[self.__mongo_database_name]
     self.collection = self.database['collection']
