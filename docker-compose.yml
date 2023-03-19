@@ -20,12 +20,14 @@ services:
     network_mode: host
 
   jenkins:
-    image: jenkins:2.60.3
+    image: jenkins/jenkins:jdk11
     privileged: true
     user: root
     ports:
-     - 3080:8080
+     - 8080:8080
      - 50000:50000
+    # volumes:
+    #   - ./jenkins/jobs/smlp:/var/jenkins_home/jobs/smlp:Z
 
 secrets:
   app_mongo_password:
