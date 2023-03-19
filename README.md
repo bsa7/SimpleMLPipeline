@@ -97,3 +97,10 @@ In development environment you can check an [html coverage report](./coverage/re
 Its look like this: ![coverage_html_report](./docs/assets/coverage_html_report.png)
 
 In github - see the latest action, for example [this](https://github.com/bsa7/SimpleMLPipeline/actions/runs/4392188767)
+
+## Jenkins
+
+In development mode run docker-compose, as shown above and visit local addres: `http://0.0.0.0:3080/`
+User: Admin
+Password: 123
+
