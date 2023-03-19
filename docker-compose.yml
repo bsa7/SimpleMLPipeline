@@ -19,6 +19,14 @@ services:
       - mongo:/data/db
     network_mode: host
 
+  jenkins:
+    image: jenkins:2.60.3
+    privileged: true
+    user: root
+    ports:
+     - 3080:8080
+     - 50000:50000
+
 secrets:
   app_mongo_password:
     file: ./stages/development/mongo/password
