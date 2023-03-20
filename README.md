@@ -53,23 +53,34 @@ Also, you can stop all services:
 docker-compose stop
 ```
 
-2. When dockerized storage is running, collect data for time series:
+2. When dockerized storage is running, you can run all ml pipeline:
+```bash
+./pipeline.sh
+```
+
+Or, you can run each pipeline step separately:
+
+2.1. Collect data for time series:
 ```bash
 python data_creation.py
 ```
 
-3. After data collected, prepare `y` values:
+2.2. After data collected, prepare `y` values:
 ```bash
 python model_preprocessing.py
 ```
 
-4. After `y` value ready, prepare model:
+2.3. After `y` value ready, prepare model:
 ```bash
 python model_preparation.py
 ```
 At the end of this step you can see the chart, like this:
 ![chart wit predictions](./docs/assets/forecasting_results.png)
 
+2.4. After model prepared, test it:
+```bash
+python model_testing.py
+```
 
 ## Continious Integration
 
