@@ -19,16 +19,6 @@ services:
       - mongo:/data/db
     network_mode: host
 
-  jenkins:
-    image: jenkins/jenkins:jdk11
-    privileged: true
-    user: root
-    ports:
-     - 8080:8080
-     - 50000:50000
-    # volumes:
-    #   - ./jenkins/jobs/smlp:/var/jenkins_home/jobs/smlp:Z
-
 secrets:
   app_mongo_password:
     file: ./stages/development/mongo/password
