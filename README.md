@@ -8,6 +8,9 @@ This application implements the simplest pipeline, including:
   - CD - continious deployment;
   - CT - continious training;
 
+## Working in Jenkins
+You can run all pipeline steps in Jenkins. See [here](./docs/pipeline_with_jenkins.md) an instructions.
+
 ## A complete iteration consists of the following operations:
 1. Receiving new data from a third-party API - obtaining information about candles for a particular instrument: maximum and minimum prices, as well as opening and closing prices;
 2. Pre-processing of data received in the API - for each candle, the average value is calculated, between the maximum and minimum prices for the candle;
