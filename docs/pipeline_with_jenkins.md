@@ -20,7 +20,7 @@ In Development mode.
 
   ![pipeline step 5](./assets/jenkins/setup_pipeline_05.png)
 
-  2.5. Press 'Add' button in bottom of page. All is ready:
+  2.5. Press 'Save' button in bottom of page. All is ready:
 
 3. Visit dashboard page: [http://0.0.0.0:8080](http://0.0.0.0:8080)
 You'll see created pipeline, named 'smlp':

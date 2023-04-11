@@ -3,32 +3,45 @@ pipeline {
   stages {
     stage('Install python modules') {
       steps {
-        sh 'pip install -r requirements.txt'
+        sh './docker/run "pip install -r requirements.txt"'
       }
     }
-    stage('copy secrets') {
+    stage('Copy secrets') {
       steps {
         sh 'cp .env.example .env'
       }
     }
     stage('Data creation') {
       steps {
-        sh 'python data_creation.py'
+        sh './docker/run "python -m tasks.data_creation"'
       }
     }
-    stage('Model_preprocessing') {
+    stage('Model preprocessing') {
       steps {
-        sh 'python model_preprocessing.py'
+        sh './docker/run "python -m tasks.model_preprocessing"'
       }
     }
-    stage('Model_preparation') {
+    stage('Model preparation') {
       steps {
-        sh 'python model_preparation.py'
+        sh './docker/run "python -m tasks.model_preparation"'
       }
     }
-    stage('Model_testing') {
+    stage('Model testing') {
       steps {
-        sh 'python model_testing.py'
+        sh './docker/run "python -m tasks.model_testing"'
+      }
+    }
+    stage('Build production Docker image') {
+      when { tag "release-v*" }
+      steps {
+        sh 'docker build . -f ./stages/production/Dockerfile.app -t sergiobelevskij/simple-ml-pipeline:$(git describe)'
+      }
+    }
+    stage('Push production image to Dockerhub') {
+      when { tag "release-v*" }
+      steps {
+        echo 'Deploying only because this commit is tagged...'
+        sh 'docker push sergiobelevskij/simple-ml-pipeline:$(git describe)'
       }
     }
   }
