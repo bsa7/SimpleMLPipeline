@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-python data_creation.py
-python model_preprocessing.py
-python model_preparation.py
-python model_testing.py
+./docker/run "python -m tasks.data_creation"
+./docker/run "python -m tasks.model_preprocessing"
+./docker/run "python -m tasks.model_preparation"
+./docker/run "python -m tasks.model_testing"

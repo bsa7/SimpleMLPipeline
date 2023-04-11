@@ -1,6 +1,17 @@
 version: '3.7'
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: stages/development/Dockerfile.app
+    image: smlp-development
+    volumes:
+      - .:/home/pn/app:Z
+    network_mode: host
+    environment:
+      - APP_ENV=development
+
   mongo:
     build:
       context: .
